@@ -40,6 +40,14 @@ contract FundMe {
         return _amount.priceConversion();
     }
 
+    receive()public payable{
+        fundMe("N/A");
+    }
+
+    fallback()public payable{
+        fundMe("N/A");
+    }
+
     function withdrawal()public onlyOwner{
         require(address(this).balance > 0, "not sufficient balance");
         for(uint256 i = 0; i < funders_arr.length ; i++){
