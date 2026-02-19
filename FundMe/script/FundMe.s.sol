@@ -18,7 +18,7 @@ contract FundMeScript is Script {
     function run() public {
         vm.startBroadcast();
 
-        _contract = new FundMe();
+        _contract = new FundMe(priceFeed);
 
         vm.stopBroadcast();
     }
