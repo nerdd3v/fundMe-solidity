@@ -13,15 +13,15 @@ contract FundMe {
         uint256 amount;
     }
 
-    // address public priceFeed;
+    address private priceFeed;
     uint256 public constant MINIMUM_FUND_IN_USD = 5;
     address private immutable I_OWNER; 
     mapping(address => userInfo) public fundInfo;
     address[] funders_arr;
     
-    constructor(){
+    constructor(address _priceFeed){
         I_OWNER = msg.sender;
-        // priceFeed = _priceFeed;
+        priceFeed = _priceFeed;
     }
 
     function fundMe(string memory _name)public payable{
@@ -29,6 +29,10 @@ contract FundMe {
         userInfo memory u = userInfo({name: _name, amount: msg.value});
         fundInfo[address(msg.sender)] = u;
         funders_arr.push(msg.sender);
+    }
+
+    function getPriceFeed()public view returns(address){
+        return priceFeed;
     }
 
     function getConversion()public view returns(uint256){

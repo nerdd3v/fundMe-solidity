@@ -7,11 +7,13 @@ import {Helper} from "./Helper.s.sol";
 
 contract FundMeScript is Script {
     FundMe public _contract;
-    address public feed;
+    Helper public heplerContract;
+    address public priceFeed;
 
-    feed = new Helper(block.chainid).getFeedAddress();
-
-    function setUp() public {}
+    function setUp() public {
+        heplerContract = new Helper(block.chainid);
+        priceFeed = heplerContract.getFeedAddress();
+    }
 
     function run() public {
         vm.startBroadcast();
