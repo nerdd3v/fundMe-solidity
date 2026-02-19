@@ -15,11 +15,12 @@ contract FundMeScript is Script {
         priceFeed = heplerContract.getFeedAddress();
     }
 
-    function run() public {
+    function run() public returns(FundMe){
         vm.startBroadcast();
 
         _contract = new FundMe(priceFeed);
 
         vm.stopBroadcast();
+        return _contract;
     }
 }

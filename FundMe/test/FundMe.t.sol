@@ -2,23 +2,23 @@
 pragma solidity ^0.8.13;
 
 import {Test} from "forge-std/Test.sol";
-import {Counter} from "../src/Counter.sol";
+import {FundMeScript} from "../script/FundMe.s.sol";
+import {FundMe} from "../src/FundMe.sol";
 
 contract CounterTest is Test {
-    Counter public counter;
+    FundMeScript public script;
+    FundMe public deployedContract;
 
     function setUp() public {
-        counter = new Counter();
-        counter.setNumber(0);
+        script = new FundMeScript();
+        // deployedContract = script.run();
     }
 
-    function test_Increment() public {
-        counter.increment();
-        assertEq(counter.number(), 1);
+    function testOwner()public{
+        vm.prank(0x20d99Eb01562f040e1c2716bd7cB48C5b450b2D0);
+        deployedContract = new FundMe(0x694AA1769357215DE4FAC081bf1f309aDC325306);
+        assertEq(deployedContract.getOwner(), 0x20d99Eb01562f040e1c2716bd7cB48C5b450b2D0, "the owner does not match");
     }
 
-    function testFuzz_SetNumber(uint256 x) public {
-        counter.setNumber(x);
-        assertEq(counter.number(), x);
-    }
+    function
 }
