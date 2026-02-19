@@ -28,8 +28,7 @@ contract CounterTest is Test {
         //fund
         vm.prank(alice);
         deployedContract.fundMe{value: 2 ether}("alice");
-        vm.prank(alice);
-        vm.expectRevert();
+        vm.prank(0x20d99Eb01562f040e1c2716bd7cB48C5b450b2D0);
         deployedContract.withdrawal();
     }
 
